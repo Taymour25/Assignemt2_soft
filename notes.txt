@@ -1,0 +1,8 @@
+when we finish the user and Account classes , then create a User class in the login and fill its attributes
+we need an auto increment for the user ID
+
+do -> addtocart , getcart :: account
+
+
+BUGS::
+- change password doesn't happen because db is used
