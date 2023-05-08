@@ -3,8 +3,40 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
+import java.io.Console;
+/*@author: Abdelrahman Taymour
+ *@modified: Tarek Mostafa Abo-Bakr
+ *@version: 0.3
+ *@date: 8/5
+ *
+ * 
+ * The Account class represents an account in the system. It includes fields for the account ID, name, password, wallet,
+ * cart, address, owned vouchers, and phone. It also contains methods for changing the account's password, adding items.
+ * 
+ * to the cart, verifying the user, retrieving the cart, retrieving the address, setting the phone, setting the name,
+ * setting the password, setting the address, and setting the ID. It also includes a method for using a voucher.
+ * 
+ * <p>The changePassword method changes the password for the user's account. It prompts the user to enter a new password,
+ * updates the password field in the Account object, and updates the password field in the corresponding row of the.
+ * Account table in the database.
+ * 
+ * 
+ * <p>The addToCart method adds an item to the user's cart.
+ * <p>The verifyUser method verifies the user's identity.
+ * <p>The getCart method retrieves the user's cart.
+ * <p>The getAddress method retrieves the user's address.
+ * <p>The setPhone method sets the user's phone number.
+ * <p>The setName method sets the user's name.
+ * <p>The setPassword method sets the user's password.
+ * <p>The setAddress method sets the user's address.
+ * <p>The setId method sets the user's ID.
+ * <p>The useVoucher method retrieves the value of a voucher from the Voucher table in the database.
+ */
+
 
 public abstract class Account {
+
+
     public int Id;
     private String name;
     private String password;
@@ -13,21 +45,33 @@ public abstract class Account {
     private String address;
     String[] ownedVouchers ={};
     private String phone ;
+
+    private static String getPasswordFromUser() {  //added v.2 by tarek
+
+        Console console = System.console(); 
+        if (console == null) {                            
+            throw new RuntimeException("No console available");
+        }
+        char[] passwordChars = console.readPassword("Enter your new password: ");
+        return new String(passwordChars);
+    }
+
 //-----------------------------------//
-    public void changePassword(User usr ) {
+  
+    public void changePassword(User usr) {      //added v.2 by tarek
         try {
-            System.out.println("Enter your new Password : ");
-            Scanner scanner=new Scanner(System.in);
-            String newpas = scanner.next();
+            String newpas = getPasswordFromUser();
             password = newpas;
-            Connect newone = new Connect("tofee.db", "Account");
+            Connect newone = new Connect("tofee.db", "Account"); 
             Connection connec = newone.connect();
             Statement state = connec.createStatement();
             state.executeQuery("UPDATE Account SET pass = "+"'"+newpas+"'"+ "\n WHERE ID = " + Id);
-        }catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
+
+
     public void addToCart(){}
     public void verifyUser(){}
     public Cart getCart(){return cart;}
