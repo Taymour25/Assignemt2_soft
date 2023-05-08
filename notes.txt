@@ -6,3 +6,29 @@ do -> addtocart , getcart :: account
 
 BUGS::
 - change password doesn't happen because db is used
+
+
+
+
+
+
+addtocart() Method @addedBy Tarek 
+v.2
+//check line 88 in item Method for getPrice();
+
+public class Cart {
+    private List<Item> items;
+    public Cart() {
+        items = new ArrayList<>();
+        totalPrice = 0;
+    }
+
+    public void addToCart(Item item) {
+        items.add(item);
+        totalPrice += item.getPrice();
+    }
+
+    public List<Item> getCart() {
+        return items;
+    }
+}
