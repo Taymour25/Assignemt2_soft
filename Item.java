@@ -79,15 +79,33 @@ private int amountAvailable;
 private String soldBy;
 private int afterOfferPrice;
 private String category;
-private int soldToday;
-private int soldThisYear;
+public int soldToday;
+public int soldThisYear;
 
 public void addOffer(){}
 public float reCalculatePrice(){return 0;}
 public void addToCart(){}
-public float getPrice(){return 0;} //add it new v.2
+public int getPrice(){return price;} //add it new v.2
 public int getSoldToday(){return 0;}
 public int getSoldThisYear(){return 0;}
-public int getAmount(){return 0 ;}
+public int getAmount(){return amountAvailable ;}
+    public void setPrice(int n){
+        price=n;
+    }
+    void setAmountAvailable(int n){
+        amountAvailable=n;
+    }
+    void setName(String x){
+        name=x;
+    }
+    void setCategory(String x){ category=x;}
+    void setSoldBy(String x){soldBy = x;}
+    String getName(){
+    return name;
+    }
+    String getCategory(){
+    return category;
+    }
+
 
 }
