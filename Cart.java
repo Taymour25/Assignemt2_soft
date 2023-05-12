@@ -71,7 +71,7 @@ import java.util.List;
 
 public class Cart {
     private List<Item> items; //add it new v.2
-    private int totalPrice;
+    public int totalPrice;
     private String paymentMethod;
 
     public Cart() {
