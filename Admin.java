@@ -1,3 +1,8 @@
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Scanner;
+
 /*@author: Abdelrahman Taymour
  *@modified: Tarek Mostafa Abo-Bakr
  *@version: 0.3
@@ -29,11 +34,47 @@
 
   */
 public class Admin extends Account{
-    
-    public void addItem(Item item){}
-    public void removeItem(Item item){}
-    public void addOffer(){}
-    public void editItem(Item item){}
-    public void setLoyaltyPoints(User user){}
-    public void viewStatistics(Item item){}
+    Connect C = new Connect("tofee.db","Item");
+    Scanner scan = new Scanner(System.in);
+    public void addItem(){
+        System.out.println("Enter Item's ID");
+        int id = scan.nextInt();
+        System.out.println("Enter Item's NAME");
+        String nm = scan.next();
+        System.out.println("Enter Item's PRICE");
+        int price = scan.nextInt();
+        System.out.println("Enter Item's Category");
+        String ct = scan.next();
+        System.out.println("Enter Item's SOLD BY");
+        String sb = scan.next();
+        System.out.println("Enter Item's Quantity available");
+        int qty = scan.nextInt();
+        C.insertItem(id,price,nm,ct,sb,qty);
+        System.out.println("item added");
+    }
+    public void removeItem(int item) throws SQLException {
+        Connection c = C.connect();
+        Statement stmnt = c.createStatement();
+        stmnt.execute("DELETE FROM Item WHERE itemID ="+item);
+        System.out.println("item deleted");
+        c.close();
+    }
+    public void addOffer(int item) throws SQLException {
+        Connection c = C.connect();
+        Statement stmnt = c.createStatement();
+        System.out.println("Enter the new item price : ");
+        int npr = scan.nextInt();
+        stmnt.execute("UPDATE Item SET price = "+ npr +" WHERE itemID ="+item);
+        System.out.println("item price changed");
+        c.close();
+    }
+    public void setLoyaltyPoints(int user) throws SQLException {
+        Connection c = C.connect();
+        Statement stmnt = c.createStatement();
+        System.out.println("Enter the new Loyalty Points : ");
+        int npr = scan.nextInt();
+        stmnt.execute("UPDATE Account SET loyaltyPoints = "+ npr +" WHERE ID ="+user);
+        System.out.println("Loyalty points Changed");
+        c.close();
+    }
 }
