@@ -39,11 +39,12 @@
 
 public class Wallet {
 private User user;
-private int balance;
+public int balance;
 private String paymentType;
 
 public String changePaymentType(){return "";};
-public int getBalance(){return 0;}
+public int getBalance(){return balance;}
+    public void setBalance(int b){balance=b;}
 public void rechargeWallet(){}
 public User getUser(){return user;}
 
